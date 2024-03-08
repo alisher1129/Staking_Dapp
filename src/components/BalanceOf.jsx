@@ -1,44 +1,31 @@
 import { useContract, useContractRead, Web3Button } from "@thirdweb-dev/react";
 import React, { useState } from "react";
+import { CONTRACT_ADDRESS } from "./contract";
+import Abi from "./Abi.json";
 
 function BalanceOf() {
-  const [balance, setBalance] = useState(0);
-  const [show, setShow] = useState(false);
+  // const [balance, setBalance] = useState(0);
+  // const [show, setShow] = useState(false);
+  const account = "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3";
 
-  const { contract } = useContract(
-    "0xA311Bd1f0A775DEe970eEF395FAa050589042e15"
-  );
-  const { data, isLoading } = useContractRead(contract, "balanceOf", [balance]);
+  const { contract } = useContract(CONTRACT_ADDRESS, Abi);
+  const { data } = useContractRead(contract, "balanceOf", [account]);
 
   return (
     <>
-      <div className="flex items-center">
-        <input
-          className="border border-gray-300 rounded-md px-3 py-2 mr-2 focus:outline-none focus:border-blue-500"
-          type="text"
-          name="value"
-          value={balance}
-          onChange={(e) => setBalance(e.target.value)}
-          placeholder="Enter amount..."
-        />
-        <button
-          className="bg-gray-200 p-4 font-bold rounded"
-          onClick={() => setShow(true)}
-        >
-          Check balance
-        </button>
+      <div class="w-full mb-10 sm:mb-0 sm:w-1/2">
+        <div class="relative h-full ml-0 mr-0 sm:mr-10">
+          <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-red-500 rounded-lg"></span>
+          <div class="relative h-full p-5 bg-white border-2 border-red-500 rounded-lg">
+            <div class="flex items-center -mt-1">
+              <h3 class="my-2 ml-3 text-4xl font-bold text-gray-800">
+                Balance
+              </h3>
+            </div>
+            <div className="ml-4 text-2xl">{data / 10 ** 18}</div>
+          </div>
+        </div>
       </div>
-      {show ? (
-        <p>
-          {" "}
-          <span className=" text-lg font-bold">Your Balance is Here:</span>{" "}
-          {data / 10 ** 18}
-        </p>
-      ) : (
-        <p>
-          <span className=" text-lg font-bold">Your Balance is Here:</span> 0
-        </p>
-      )}
     </>
   );
 }
