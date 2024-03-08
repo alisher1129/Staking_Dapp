@@ -5,6 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 import { Sepolia } from "@thirdweb-dev/chains";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import "./styles/globals.css";
+import { ToastContainer  } from 'react-toastify';
+
 
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
@@ -20,6 +22,7 @@ root.render(
       clientId={process.env.REACT_APP_TEMPLATE_CLIENT_ID}
     >
       <App />
+      <ToastContainer />
     </ThirdwebProvider>
   </React.StrictMode>
 );

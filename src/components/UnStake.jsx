@@ -2,6 +2,8 @@ import { useContract, useContractWrite, Web3Button } from "@thirdweb-dev/react";
 import React, { useState } from "react";
 import { CONTRACT_ADDRESS } from "./contract";
 import Abi from "./Abi.json";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 /* global BigInt */
 
 function UnStake() {
@@ -11,7 +13,7 @@ function UnStake() {
     CONTRACT_ADDRESS, Abi
   );
 
-  const { mutateAsync, isLoading } = useContractWrite(
+  const { mutateAsync , error} = useContractWrite(
     contract,
     "unStake"
 
@@ -39,13 +41,16 @@ function UnStake() {
               <Web3Button className="bg-blue-500"
                 contractAddress={CONTRACT_ADDRESS}
                 action={() => mutateAsync({ args: [BigInt(RemoveStake * 10 ** 18)] })}
-                onError={(error) => alert("Please Wait!")}
+                onError={(error) => toast.error("Please Wait!"  , error)}
                 style={{ background: "blue", color: "white", fontFamily: "Times New Roman", fontWeight: "bold", width: "300px" }}
 
 
               >
                 Unstake
               </Web3Button>
+              
+
+
 
             </div>
 

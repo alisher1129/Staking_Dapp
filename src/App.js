@@ -14,36 +14,22 @@ export default function Home() {
         <ConnectWallet />
       </div>
 
+      <div className="flex justify-center">
+        <div className="w-1/2 border-2 border-black border-solid  shadow rounded p-4 mt-10  ">
+          <div className="   space-y-10">
+            <div className="flex flex-col  justify-center items-center space-y-10 ">
+              <CheckStake />
+              <BalanceOf />
+              <div className="flex ">
+                <StakeToken />
+                <UnStake />
+              </div>
 
-
-
-
-
-
-
-
-<div className="flex justify-center">
-<div className="w-1/2 border-2 border-black border-solid  shadow rounded p-4 mt-10  ">
-        <div className="   space-y-10">
-          <div className="flex flex-col  justify-center items-center space-y-10 ">
-            <CheckStake />
-            <BalanceOf />
-            <div className="flex ">
-              <StakeToken />
-              <UnStake />
+              <ClaimYourReward />
             </div>
-
-            <ClaimYourReward />
           </div>
         </div>
       </div>
-
-</div>
-
-
-
-
-    
     </>
   );
 }

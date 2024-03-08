@@ -2,13 +2,15 @@ import { useContract, useContractWrite, Web3Button } from "@thirdweb-dev/react";
 import React, { useState } from "react";
 import { CONTRACT_ADDRESS } from "./contract";
 import Abi from "./Abi.json";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 /* global BigInt */
 function StakeToken() {
   const [countStake, setCountStake] = useState(0);
 
   const { contract } = useContract(CONTRACT_ADDRESS, Abi);
-  const { mutateAsync: stakeToken, isLoading } = useContractWrite(
+  const { mutateAsync: stakeToken } = useContractWrite(
     contract,
     "stakeToken"
   );
@@ -35,7 +37,7 @@ function StakeToken() {
                 action={() =>
                   stakeToken({ args: [BigInt(countStake * 10 ** 18)] })
                 }
-                onError={(error) => alert("Something went wrong!")}
+                onError={(error) => toast.error("Something went wrong!")}
                 style={{
                   background: "blue",
                   color: "white",
@@ -46,6 +48,7 @@ function StakeToken() {
               >
                 Stake
               </Web3Button>
+              
             </div>
           </div>
         </div>
