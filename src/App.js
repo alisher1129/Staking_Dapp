@@ -9,18 +9,17 @@ import CheckStake from "./components/CheckStake";
 export default function Home() {
   return (
     <>
-      <div className="flex justify-evenly mt-12">
-        <div className=" text-5xl font-bold">Staking Dapp</div>
+      <div className="flex flex-col justify-center items-center space-y-2 md:flex mt-12">
+        <div className=" text-4xl font-mono font-bold   md:text-5xl">Staking Dapp</div>
         <ConnectWallet />
       </div>
 
-      <div className="flex justify-center">
-        <div className="w-1/2 border-2 border-black border-solid  shadow rounded p-4 mt-10  ">
-          <div className="   space-y-10">
+      <div className="flex  justify-center mt-14">
+          <div className="  space-y-14">
             <div className="flex flex-col  justify-center items-center space-y-10 ">
               <CheckStake />
               <BalanceOf />
-              <div className="flex ">
+              <div className="flex flex-col md:flex-row "> 
                 <StakeToken />
                 <UnStake />
               </div>
@@ -28,7 +27,7 @@ export default function Home() {
               <ClaimYourReward />
             </div>
           </div>
-        </div>
+        
       </div>
     </>
   );

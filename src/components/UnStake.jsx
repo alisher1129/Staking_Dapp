@@ -13,7 +13,7 @@ function UnStake() {
     CONTRACT_ADDRESS, Abi
   );
 
-  const { mutateAsync , error} = useContractWrite(
+  const { mutateAsync } = useContractWrite(
     contract,
     "unStake"
 
@@ -22,7 +22,7 @@ function UnStake() {
     <>
 
 
-      <div class="w-full  mb-10 sm:mb-0 sm:w-1/2">
+      <div class="w-full sm:mb-0 sm:w-1/2">
         <div class="relative h-full ml-0 mr-0 sm:mr-10">
           <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-green-500 rounded-lg"></span>
           <div class="relative h-full p-5 bg-white border-2 border-green-500 rounded-lg">
