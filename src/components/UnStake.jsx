@@ -17,7 +17,7 @@ const address = useAddress();
   const { data } = useContractRead(contract, "userStake", [address]);
 
   const EmptyField = ()=> toast.error("Please Enter the amount");
-  const LowBalance = ()=> toast.error("Re-Enter Amount");
+  const LowBalance = ()=> toast.error("insufficient Amount");
 
   return (
     <>
@@ -43,7 +43,7 @@ const address = useAddress();
                 contractAddress={CONTRACT_ADDRESS}
                 action={() => 
                   {if (RemoveStake > 0) { 
-                  if (RemoveStake <= data) { 
+                  if (RemoveStake <= data.amount / 10 ** 18) { 
                       mutateAsync({ args: [BigInt(RemoveStake * 10 ** 18)] }); 
                   } else {
                       LowBalance(); 

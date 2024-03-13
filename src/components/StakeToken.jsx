@@ -42,7 +42,7 @@ const address = useAddress();
                 contractAddress={CONTRACT_ADDRESS}
                 action={() => {
                   if (countStake > 0) {
-                    if(countStake <= data ){
+                    if(countStake <= data / 10 ** 18 ){
                       stakeToken({ args: [BigInt(countStake * 10 ** 18)] });
                     }else{
                       LowBalance()
