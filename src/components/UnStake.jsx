@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function UnStake() {
   const [RemoveStake, setRemoveStake] = useState(0);
-  // const account = "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3";
+  
 
 const address = useAddress();
   const { contract } = useContract(CONTRACT_ADDRESS, Abi);
@@ -23,10 +23,10 @@ const address = useAddress();
     <>
 
 
-      <div class="w-full sm:mb-0 sm:w-1/2">
-        <div class="relative h-full ml-0 mr-0 sm:mr-10">
-          <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-green-500 rounded-lg"></span>
-          <div class="relative h-full p-5 bg-white border-2 border-green-500 rounded-lg">
+      <div className="w-full sm:mb-0 sm:w-1/2">
+        <div className="relative h-full ml-0 mr-0 sm:mr-10">
+          <span className="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-green-500 rounded-lg"></span>
+          <div className="relative h-full p-5 bg-white border-2 border-green-500 rounded-lg">
 
 
 
