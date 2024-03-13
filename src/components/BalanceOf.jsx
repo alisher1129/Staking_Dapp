@@ -16,7 +16,7 @@ function BalanceOf() {
 
 
   const { contract } = useContract(CONTRACT_ADDRESS, Abi);
-  const { data } = useContractRead(contract, "getBalance", [address]);
+  const { data } = useContractRead(contract, "balanceOf", [address]);
 
   return (
     <>
