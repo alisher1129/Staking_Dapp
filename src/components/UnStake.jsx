@@ -1,4 +1,4 @@
-import { useContract, useContractWrite, Web3Button , useContractRead} from "@thirdweb-dev/react";
+import { useContract, useContractWrite, Web3Button , useContractRead , useAddress} from "@thirdweb-dev/react";
 import React, { useState } from "react";
 import { CONTRACT_ADDRESS } from "./contract";
 import Abi from "./Abi.json";
@@ -8,13 +8,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function UnStake() {
   const [RemoveStake, setRemoveStake] = useState(0);
-  const account = "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3";
+  // const account = "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3";
 
-
+const address = useAddress();
   const { contract } = useContract(CONTRACT_ADDRESS, Abi);
 
   const { mutateAsync } = useContractWrite(contract, "unStake");
-  const { data } = useContractRead(contract, "userStake", [account]);
+  const { data } = useContractRead(contract, "userStake", [address]);
 
   const EmptyField = ()=> toast.error("Please Enter the amount");
   const LowBalance = ()=> toast.error("Re-Enter Amount");

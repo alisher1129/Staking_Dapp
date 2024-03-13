@@ -2,7 +2,7 @@ import {
   useContract,
   useContractRead,
   useContractWrite,
-  Web3Button,
+  Web3Button, useAddress
 } from "@thirdweb-dev/react";
 import React, { useState } from "react";
 import  { CONTRACT_ADDRESS  } from "./contract";
@@ -10,11 +10,12 @@ import  Abi  from "./Abi.json";
 
 
 function CheckStake() {
-  const account = "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3";
+  // const account = "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3";
+  const address = useAddress();
   const { contract } = useContract(
     CONTRACT_ADDRESS , Abi
   );
-  const { data } = useContractRead(contract, "userStake", [account]);
+  const { data } = useContractRead(contract, "userStake", [address]);
   return (
     <>
       <div class="w-[330px] sm:mb-0 sm:w-[750px]">

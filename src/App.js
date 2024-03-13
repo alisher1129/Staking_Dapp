@@ -7,6 +7,8 @@ import { ConnectWallet } from "@thirdweb-dev/react";
 import CheckStake from "./components/CheckStake";
 
 export default function Home() {
+ 
+
   return (
     <>
       <div className="flex flex-col justify-center items-center space-y-2 md:flex mt-12">

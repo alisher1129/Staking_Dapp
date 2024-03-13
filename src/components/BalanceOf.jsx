@@ -1,4 +1,4 @@
-import { useContract, useContractRead, Web3Button } from "@thirdweb-dev/react";
+import { useContract, useContractRead, Web3Button , useAddress } from "@thirdweb-dev/react";
 import React, { useState } from "react";
 import { CONTRACT_ADDRESS } from "./contract";
 import Abi from "./Abi.json";
@@ -6,10 +6,11 @@ import Abi from "./Abi.json";
 function BalanceOf() {
   // const [balance, setBalance] = useState(0);
   // const [show, setShow] = useState(false);
-  const account = "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3";
+  // const account = "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3";
+  const address = useAddress();
 
   const { contract } = useContract(CONTRACT_ADDRESS, Abi);
-  const { data } = useContractRead(contract, "balanceOf", [account]);
+  const { data } = useContractRead(contract, "balanceOf", [address]);
 
   return (
     <>
