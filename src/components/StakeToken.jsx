@@ -1,20 +1,26 @@
-import { useContract, useContractWrite, Web3Button } from "@thirdweb-dev/react";
+import { useContract, useContractWrite, Web3Button , useContractRead} from "@thirdweb-dev/react";
 import React, { useState } from "react";
 import { CONTRACT_ADDRESS } from "./contract";
 import Abi from "./Abi.json";
-import {  toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 /* global BigInt */
 function StakeToken() {
   const [countStake, setCountStake] = useState(0);
+  const account = "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3";
+
 
   const { contract } = useContract(CONTRACT_ADDRESS, Abi);
-  const { mutateAsync: stakeToken } = useContractWrite(
-    contract,
-    "stakeToken"
-  );
+  const { mutateAsync: stakeToken } = useContractWrite(contract, "stakeToken");
+  const { data } = useContractRead(contract, "balanceOf", [account]);
 
+  const EmptyField = ()=> toast.error("Please Enter the amount");
+  const LowBalance = ()=> toast.error("insufficient balance");
+
+ 
+ 
+ 
   return (
     <>
       <div class="w-full mb-10 sm:mb-0 sm:w-1/2">
@@ -34,10 +40,22 @@ function StakeToken() {
 
               <Web3Button
                 contractAddress={CONTRACT_ADDRESS}
-                action={() =>
-                  stakeToken({ args: [BigInt(countStake * 10 ** 18)] })
-                }
-                onError={(error) => toast.error("Something went wrong!")}
+                action={() => {
+                  if (countStake > 0) {
+                    if(countStake <= data ){
+                      stakeToken({ args: [BigInt(countStake * 10 ** 18)] });
+                    }else{
+                      LowBalance()
+                    }
+                  }else{
+                    EmptyField()
+                  }
+                }}
+               
+               
+               
+               
+                onError={(error) => toast.error("Amount is bigger!")}
                 style={{
                   background: "blue",
                   color: "white",
@@ -48,7 +66,6 @@ function StakeToken() {
               >
                 Stake
               </Web3Button>
-              
             </div>
           </div>
         </div>

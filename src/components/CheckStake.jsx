@@ -15,7 +15,6 @@ function CheckStake() {
     CONTRACT_ADDRESS , Abi
   );
   const { data } = useContractRead(contract, "userStake", [account]);
-  console.log(data);
   return (
     <>
       <div class="w-[330px] sm:mb-0 sm:w-[750px]">

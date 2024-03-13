@@ -1,4 +1,4 @@
-import { useContract, useContractWrite, Web3Button } from "@thirdweb-dev/react";
+import { useContract, useContractWrite, Web3Button , useContractRead} from "@thirdweb-dev/react";
 import React, { useState } from "react";
 import { CONTRACT_ADDRESS } from "./contract";
 import Abi from "./Abi.json";
@@ -8,16 +8,17 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function UnStake() {
   const [RemoveStake, setRemoveStake] = useState(0);
+  const account = "0x13101a2e6497817C2307E932F0bC90bD8f52b1d3";
 
-  const { contract } = useContract(
-    CONTRACT_ADDRESS, Abi
-  );
 
-  const { mutateAsync } = useContractWrite(
-    contract,
-    "unStake"
+  const { contract } = useContract(CONTRACT_ADDRESS, Abi);
 
-  );
+  const { mutateAsync } = useContractWrite(contract, "unStake");
+  const { data } = useContractRead(contract, "userStake", [account]);
+
+  const EmptyField = ()=> toast.error("Please Enter the amount");
+  const LowBalance = ()=> toast.error("Re-Enter Amount");
+
   return (
     <>
 
@@ -40,8 +41,22 @@ function UnStake() {
               />
               <Web3Button className="bg-blue-500"
                 contractAddress={CONTRACT_ADDRESS}
-                action={() => mutateAsync({ args: [BigInt(RemoveStake * 10 ** 18)] })}
-                onError={(error) => toast.error("Please Wait!"  , error)}
+                action={() => 
+                  {if (RemoveStake > 0) { 
+                  if (RemoveStake <= data) { 
+                      mutateAsync({ args: [BigInt(RemoveStake * 10 ** 18)] }); 
+                  } else {
+                      LowBalance(); 
+                  }
+              } else {
+                  EmptyField(); 
+              }
+              } }               
+                  
+                onError={(error) => { toast.error("Please Wait!")}}
+                         
+                
+                
                 style={{ background: "blue", color: "white", fontFamily: "Times New Roman", fontWeight: "bold", width: "300px" }}
 
 

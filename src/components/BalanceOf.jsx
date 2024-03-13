@@ -31,3 +31,4 @@ function BalanceOf() {
 }
 
 export default BalanceOf;
+
