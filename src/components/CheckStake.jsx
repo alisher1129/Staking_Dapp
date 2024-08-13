@@ -29,7 +29,7 @@ function CheckStake() {
                 Stake Tokens
               </h3>
             </div>
-            <div className="ml-4 text-2xl">{data ? data.amount/10**18: "0"}</div>
+            <div className="ml-4 text-2xl">{data ? data.amount/10**18 :  "0"}</div>
           </div>
         </div>
       </div>

@@ -17,7 +17,16 @@ const address = useAddress();
 
   const EmptyField = ()=> toast.error("Please Enter the amount");
   const LowBalance = ()=> toast.error("insufficient balance");
-
+  const Wait = ()=> toast.error("Please Wait!");
+  const call = async () => {
+    try {
+      const data = await stakeToken({ args: [BigInt(countStake * 10 ** 18)] });
+      console.info("contract call successs", data);
+    } catch (err) {
+Wait()
+      console.error("contract call failure", err);
+    }
+  }
  
  
  
@@ -43,7 +52,8 @@ const address = useAddress();
                 action={() => {
                   if (countStake > 0) {
                     if(countStake <= data / 10 ** 18 ){
-                      stakeToken({ args: [BigInt(countStake * 10 ** 18)] });
+                      // stakeToken({ args: [BigInt(countStake * 10 ** 18)] });
+                      call()
                     }else{
                       LowBalance()
                     }
@@ -55,7 +65,7 @@ const address = useAddress();
                
                
                
-                onError={(error) => toast.error("Amount is bigger!")}
+                // onError={(error) => toast.error("Amount is bigger!")}
                 style={{
                   background: "blue",
                   color: "white",
